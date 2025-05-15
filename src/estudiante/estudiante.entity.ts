@@ -13,7 +13,7 @@ export class EstudianteEntity {
     nombre: string;
 
     @Column()
-    semestre: string;
+    semestre: number;
 
     @Column()
     programa: string;
