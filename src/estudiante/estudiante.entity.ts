@@ -24,7 +24,7 @@ export class EstudianteEntity {
   @Column()
   programa: string;
 
-  @Column()
+  @Column('decimal')
   promedio: number;
 
   @OneToMany(() => ProyectoEntity, (proyecto) => proyecto.estudiante)
