@@ -2,13 +2,14 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Long, Repository } from 'typeorm';
 import { ProyectoEntity } from './proyecto.entity';
-import { EstudianteEntity } from 'src/estudiante/estudiante.entity';
+import { EstudianteEntity } from '../estudiante/estudiante.entity';
 
 @Injectable()
 export class ProyectoService {
   constructor(
     @InjectRepository(ProyectoEntity)
     private readonly proyectoRepository: Repository<ProyectoEntity>,
+    @InjectRepository(EstudianteEntity)
     private readonly estudianteRepository: Repository<EstudianteEntity>,
   ) {}
 

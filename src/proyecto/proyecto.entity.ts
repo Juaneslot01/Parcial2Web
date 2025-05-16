@@ -6,9 +6,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { EstudianteEntity } from 'src/estudiante/estudiante.entity';
-import { ProfesorEntity } from 'src/profesor/profesor.entity';
-import { EvaluacionEntity } from 'src/evaluacion/evaluacion.entity';
+import { EstudianteEntity } from '../estudiante/estudiante.entity';
+import { ProfesorEntity } from '../profesor/profesor.entity';
+import { EvaluacionEntity } from '../evaluacion/evaluacion.entity';
 
 @Entity()
 export class ProyectoEntity {

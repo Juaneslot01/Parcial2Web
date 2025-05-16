@@ -29,10 +29,16 @@ export class EstudianteService {
   async create(estudiante: EstudianteEntity): Promise<EstudianteEntity> {
     if (estudiante.promedio > 3.2 && estudiante.semestre >= 4) {
       return await this.estudianteRepository.save(estudiante);
-    } else {
+    } else if (estudiante.promedio < 3.2) {
       throw new BadRequestException(
-        'El estudiante no cumple con los requisitos para crear un proyecto',
+        'El estudiante no tiene el promedio necesario',
       );
+    } else if (estudiante.semestre < 4) {
+      throw new BadRequestException(
+        'El estudiante no tiene el semestre necesario',
+      );
+    } else {
+      throw new BadRequestException('No se pudo crear el estudiante');
     }
   }
 
@@ -40,7 +46,7 @@ export class EstudianteService {
     try {
       const estudiante = await this.findOne(id);
       if (estudiante.proyectos.length > 0) {
-        throw new Error(
+        throw new BadRequestException(
           'El estudiante no puede ser eliminado porque tiene proyectos asociados',
         );
       }

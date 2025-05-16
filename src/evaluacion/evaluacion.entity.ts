@@ -5,8 +5,8 @@ import {
   PrimaryGeneratedColumn,
   Column,
 } from 'typeorm';
-import { ProyectoEntity } from 'src/proyecto/proyecto.entity';
-import { ProfesorEntity } from 'src/profesor/profesor.entity';
+import { ProyectoEntity } from '../proyecto/proyecto.entity';
+import { ProfesorEntity } from '../profesor/profesor.entity';
 
 @Entity()
 export class EvaluacionEntity {
