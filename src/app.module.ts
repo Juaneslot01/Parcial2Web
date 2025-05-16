@@ -24,7 +24,7 @@ import { EvaluacionModule } from './evaluacion/evaluacion.module';
     EstudianteModule,
     ProfesorModule,
     ProyectoModule,
-    EvaluacionModule
+    EvaluacionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

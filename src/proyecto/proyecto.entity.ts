@@ -1,42 +1,47 @@
-import { Column, Entity, Long, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { EstudianteEntity } from "src/estudiante/estudiante.entity";
-import { ProfesorEntity } from "src/profesor/profesor.entity";
-import { EvaluacionEntity } from "src/evaluacion/evaluacion.entity";
+import {
+  Column,
+  Entity,
+  Long,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { EstudianteEntity } from 'src/estudiante/estudiante.entity';
+import { ProfesorEntity } from 'src/profesor/profesor.entity';
+import { EvaluacionEntity } from 'src/evaluacion/evaluacion.entity';
 
 @Entity()
 export class ProyectoEntity {
+  @PrimaryGeneratedColumn()
+  id: Long;
 
-    @PrimaryGeneratedColumn()
-    id: Long;
+  @Column()
+  titulo: string;
 
-    @Column()
-    titulo: string;
+  @Column()
+  area: string;
 
-    @Column()
-    area: string;
+  @Column()
+  presupuesto: number;
 
-    @Column()
-    presupuesto: number;
+  @Column()
+  notaFinal: number;
 
-    @Column()
-    notaFinal: number;
+  @Column()
+  estado: number;
 
-    @Column()
-    estado: number;
+  @Column()
+  fechaInicio: string;
 
-    @Column()
-    fechaInicio: string;
+  @Column()
+  fechaFin: string;
 
-    @Column()
-    fechaFin: string;
+  @ManyToOne(() => EstudianteEntity, (estudiante) => estudiante.proyectos)
+  estudiante: EstudianteEntity;
 
-    @ManyToOne(() => EstudianteEntity, (estudiante) => estudiante.proyectos)
-    estudiante: EstudianteEntity;
+  @ManyToOne(() => ProfesorEntity, (profesor) => profesor.proyectos)
+  profesor: ProfesorEntity;
 
-    @ManyToOne(() => ProfesorEntity, (profesor) => profesor.proyectos)
-    profesor: ProfesorEntity;
-
-    @OneToMany(() => EvaluacionEntity, (evaluacion) => evaluacion.proyecto)
-    evaluaciones: EvaluacionEntity[];
+  @OneToMany(() => EvaluacionEntity, (evaluacion) => evaluacion.proyecto)
+  evaluaciones: EvaluacionEntity[];
 }
-
