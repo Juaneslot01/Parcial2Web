@@ -1,13 +1,20 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProfesorEntity } from './profesor.entity';
 import { Long, Repository } from 'typeorm';
+import { EvaluacionEntity } from '../evaluacion/evaluacion.entity';
 
 @Injectable()
 export class ProfesorService {
   constructor(
     @InjectRepository(ProfesorEntity)
     private readonly profesorRepository: Repository<ProfesorEntity>,
+    @InjectRepository(EvaluacionEntity)
+    private readonly evaluacionRepository: Repository<EvaluacionEntity>,
   ) {}
 
   async create(profesor: ProfesorEntity): Promise<ProfesorEntity> {
@@ -20,24 +27,31 @@ export class ProfesorService {
     }
   }
 
-  async asignarEvaluador(profesor: ProfesorEntity, idEvaluacion: Long) {
-    if (profesor.evaluaciones.length < 3) {
-      const evaluacion = await this.profesorRepository.findOne({
-        where: { id: idEvaluacion },
-      });
-      if (!profesor) {
-        throw new Error('La evaluacion no existe');
-      }
-      if (!evaluacion) {
-        throw new Error('El profesor no existe');
-      }
-      profesor.esParEvaluador = true;
-      await this.profesorRepository.save(evaluacion);
-    } else {
-      throw new Error(
+  async asignarEvaluador(profesorId: Long, idEvaluacion: Long): Promise<void> {
+    const profesor = await this.profesorRepository.findOne({
+      where: { id: profesorId },
+      relations: ['evaluaciones'],
+    });
+    if (!profesor) {
+      throw new NotFoundException('El profesor no existe');
+    }
+    const evaluacion = await this.evaluacionRepository.findOne({
+      where: { id: idEvaluacion },
+    });
+    if (!evaluacion) {
+      throw new NotFoundException('La evaluación no existe');
+    }
+    if (profesor.evaluaciones.length >= 3) {
+      throw new BadRequestException(
         'El profesor no puede ser asignado a más de 3 evaluaciones',
       );
     }
+    profesor.evaluaciones.push(evaluacion);
+    profesor.esParEvaluador = true;
+    evaluacion.profesor = profesor;
+
+    await this.profesorRepository.save(profesor);
+    await this.evaluacionRepository.save(evaluacion);
   }
 
   async findOne(id: Long): Promise<ProfesorEntity> {

@@ -44,6 +44,7 @@ describe('EstudianteService', () => {
     const createdEstudiante = await service.create(newEstudiante);
     expect(createdEstudiante).toBeDefined();
     expect(createdEstudiante.id).toBeDefined();
+    expect(createdEstudiante.cedula).toEqual(newEstudiante.cedula);
     expect(createdEstudiante.nombre).toEqual(newEstudiante.nombre);
     expect(createdEstudiante.semestre).toEqual(newEstudiante.semestre);
     expect(createdEstudiante.programa).toEqual(newEstudiante.programa);
