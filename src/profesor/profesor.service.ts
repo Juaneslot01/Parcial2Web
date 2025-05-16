@@ -27,7 +27,7 @@ export class ProfesorService {
     }
   }
 
-  async asignarEvaluador(profesorId: Long, idEvaluacion: Long): Promise<void> {
+  async asignarEvaluador(profesorId: bigint, idEvaluacion: bigint): Promise<void> {
     const profesor = await this.profesorRepository.findOne({
       where: { id: profesorId },
       relations: ['evaluaciones'],
@@ -54,7 +54,7 @@ export class ProfesorService {
     await this.evaluacionRepository.save(evaluacion);
   }
 
-  async findOne(id: Long): Promise<ProfesorEntity> {
+  async findOne(id: bigint): Promise<ProfesorEntity> {
     const profesor = await this.profesorRepository.findOne({ where: { id } });
     if (!profesor) {
       throw new BadRequestException('El profesor no existe');

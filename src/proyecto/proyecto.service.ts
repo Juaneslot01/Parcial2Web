@@ -29,7 +29,7 @@ export class ProyectoService {
     }
   }
 
-  async avanzarProyecto(id: Long): Promise<ProyectoEntity> {
+  async avanzarProyecto(id: bigint): Promise<ProyectoEntity> {
     const proyecto = await this.proyectoRepository.findOne({ where: { id } });
     if (!proyecto) {
       throw new Error('El proyecto no existe');
@@ -44,7 +44,7 @@ export class ProyectoService {
     }
   }
   //Cambie este metodo porque solo existe un estudiante segun el uml
-  async findEstudiantes(proyectoId: Long): Promise<EstudianteEntity | null> {
+  async findEstudiantes(proyectoId: bigint): Promise<EstudianteEntity | null> {
     const estudiante = this.estudianteRepository.findOne({
       where: { proyectos: { id: proyectoId } },
       relations: ['proyectos'],

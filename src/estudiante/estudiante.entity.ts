@@ -10,7 +10,7 @@ import {
 @Entity()
 export class EstudianteEntity {
   @PrimaryGeneratedColumn()
-  id: Long;
+  id: bigint;
 
   @Column()
   cedula: number;

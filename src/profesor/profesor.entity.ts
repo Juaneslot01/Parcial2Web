@@ -11,7 +11,7 @@ import {
 @Entity()
 export class ProfesorEntity {
   @PrimaryGeneratedColumn()
-  id: Long;
+  id: bigint;
 
   @Column()
   cedula: number;

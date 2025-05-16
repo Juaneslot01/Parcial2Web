@@ -6,6 +6,10 @@ import { EstudianteModule } from './estudiante/estudiante.module';
 import { ProfesorModule } from './profesor/profesor.module';
 import { ProyectoModule } from './proyecto/proyecto.module';
 import { EvaluacionModule } from './evaluacion/evaluacion.module';
+import { EstudianteEntity } from './estudiante/estudiante.entity';
+import { ProyectoEntity } from './proyecto/proyecto.entity';
+import { EvaluacionEntity } from './evaluacion/evaluacion.entity';
+import { ProfesorEntity } from './profesor/profesor.entity';
 
 @Module({
   imports: [
@@ -16,10 +20,10 @@ import { EvaluacionModule } from './evaluacion/evaluacion.module';
       username: 'postgres',
       password: 'postgres',
       database: 'parcial2',
-      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+      entities: [EstudianteEntity, ProyectoEntity, EvaluacionEntity, ProfesorEntity],
       dropSchema: true,
       synchronize: true,
-      autoLoadEntities: true,
+      logging: true,
     }),
     EstudianteModule,
     ProfesorModule,

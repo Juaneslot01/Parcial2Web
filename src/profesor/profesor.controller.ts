@@ -16,9 +16,9 @@ export class ProfesorController {
     return await this.create(profesor);
   }
 
-  @Put(':profesorId/asignar-avaluador')
+  @Put(':profesorId/asignar-evaluador')
   async asignarEvaluador(
-    @Param('profesorId') profesorId: Long,
+    @Param('profesorId') profesorId: bigint,
     @Body() profesorDTO: ProfesorDto,
   ): Promise<ProfesorEntity> {
     const profesor = await this.profesorService.findOne(profesorId);

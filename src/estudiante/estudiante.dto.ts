@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+
 
 export class EstudianteDto {
+
+  @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
   readonly cedula: number;
@@ -10,6 +14,7 @@ export class EstudianteDto {
   @IsNotEmpty()
   readonly nombre: string;
 
+  @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
   readonly semestre: number;
@@ -18,6 +23,7 @@ export class EstudianteDto {
   @IsNotEmpty()
   readonly programa: string;
 
+  @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
   readonly promedio: number;

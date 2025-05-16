@@ -1,6 +1,5 @@
 import {
   Entity,
-  Long,
   ManyToOne,
   PrimaryGeneratedColumn,
   Column,
@@ -11,7 +10,7 @@ import { ProfesorEntity } from '../profesor/profesor.entity';
 @Entity()
 export class EvaluacionEntity {
   @PrimaryGeneratedColumn()
-  id: Long;
+  id: bigint;
 
   @Column()
   calificacion: number;

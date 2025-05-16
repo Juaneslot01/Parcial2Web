@@ -6,6 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { EstudianteEntity } from './estudiante.entity';
 import { Long, Repository } from 'typeorm';
+import { BusinessLogicException, BusinessError } from '../shared/errors/business-errors';
 
 @Injectable()
 export class EstudianteService {
@@ -14,7 +15,7 @@ export class EstudianteService {
     private readonly estudianteRepository: Repository<EstudianteEntity>,
   ) {}
 
-  async findOne(id: Long): Promise<EstudianteEntity> {
+  async findOne(id: bigint): Promise<EstudianteEntity> {
     const estudiante = await this.estudianteRepository.findOne({
       where: { id },
       relations: ['proyectos'],
@@ -30,24 +31,30 @@ export class EstudianteService {
     if (estudiante.promedio > 3.2 && estudiante.semestre >= 4) {
       return await this.estudianteRepository.save(estudiante);
     } else if (estudiante.promedio < 3.2) {
-      throw new BadRequestException(
+      throw new BusinessLogicException(
         'El estudiante no tiene el promedio necesario',
+        BusinessError.BAD_REQUEST,
       );
     } else if (estudiante.semestre < 4) {
-      throw new BadRequestException(
+      throw new BusinessLogicException(
         'El estudiante no tiene el semestre necesario',
+        BusinessError.BAD_REQUEST,
       );
     } else {
-      throw new BadRequestException('No se pudo crear el estudiante');
+      throw new BusinessLogicException(
+        'No se pudo crear el estudiante', 
+        BusinessError.BAD_REQUEST
+      );
     }
   }
 
-  async delete(id: Long) {
+  async delete(id: bigint) {
     try {
       const estudiante = await this.findOne(id);
       if (estudiante.proyectos.length > 0) {
-        throw new BadRequestException(
+        throw new BusinessLogicException(
           'El estudiante no puede ser eliminado porque tiene proyectos asociados',
+          BusinessError.PRECONDITION_FAILED,
         );
       }
       await this.estudianteRepository.remove(estudiante);

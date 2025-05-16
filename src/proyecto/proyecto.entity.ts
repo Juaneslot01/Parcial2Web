@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  Long,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,7 +12,7 @@ import { EvaluacionEntity } from '../evaluacion/evaluacion.entity';
 @Entity()
 export class ProyectoEntity {
   @PrimaryGeneratedColumn()
-  id: Long;
+  id: bigint;
 
   @Column()
   titulo: string;
