@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "3a48e593-cbfb-4fa4-bc78-6c32ea3b6bea",
+		"name": "Estudiante",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32499104",
+		"_collection_link": "https://parcial-3144.postman.co/workspace/Parcial~8f208c44-4863-49ec-a7ba-dd9180487611/collection/32499104-3a48e593-cbfb-4fa4-bc78-6c32ea3b6bea?action=share&source=collection_link&creator=32499104"
+	},
+	"item": [
+		{
+			"name": "Create Estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"estudiante_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 1023910123,\n    \"nombre\": \"Juan Torres\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas\",\n    \"promedio\": 3.8\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/estudiante",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create estudiante with invalid promedio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 1023910123,\n    \"nombre\": \"Juan Torres\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas\",\n    \"promedio\": 2.5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/estudiante",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create estudiante with invalid semestre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 1023910123,\n    \"nombre\": \"Juan Torres\",\n    \"semestre\": 2,\n    \"programa\": \"Ingenieria de Sistemas\",\n    \"promedio\": 3.7\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/estudiante",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/estudiante/{{estudiante_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"estudiante",
+						"{{estudiante_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
