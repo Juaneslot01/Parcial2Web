@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProfesorEntity } from './profesor.entity';
 import { Long, Repository } from 'typeorm';
 import { EvaluacionEntity } from '../evaluacion/evaluacion.entity';
+import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 
 @Injectable()
 export class ProfesorService {
@@ -21,8 +22,9 @@ export class ProfesorService {
     if (profesor.extension.toString().length === 5) {
       return await this.profesorRepository.save(profesor);
     } else {
-      throw new BadRequestException(
+      throw new BusinessLogicException(
         'El profesor no cumple con los requisitos para ser creado',
+        BusinessError.BAD_REQUEST,
       );
     }
   }

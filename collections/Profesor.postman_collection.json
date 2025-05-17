@@ -1,21 +1,21 @@
 {
 	"info": {
-		"_postman_id": "3a48e593-cbfb-4fa4-bc78-6c32ea3b6bea",
-		"name": "Estudiante",
+		"_postman_id": "97499c12-b6ec-4331-a310-3b4ac2409f31",
+		"name": "Profesor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "32499104",
-		"_collection_link": "https://parcial-3144.postman.co/workspace/Parcial~8f208c44-4863-49ec-a7ba-dd9180487611/collection/32499104-3a48e593-cbfb-4fa4-bc78-6c32ea3b6bea?action=share&source=collection_link&creator=32499104"
+		"_collection_link": "https://parcial-3144.postman.co/workspace/Parcial~8f208c44-4863-49ec-a7ba-dd9180487611/collection/32499104-97499c12-b6ec-4331-a310-3b4ac2409f31?action=share&source=collection_link&creator=32499104"
 	},
 	"item": [
 		{
-			"name": "Create Estudiante",
+			"name": "Create Profesor",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"var data = pm.response.json()",
-							"pm.globals.set(\"estudiante_id\", data.id);",
+							"pm.globals.set(\"profesor_id\", data.id);",
 							"",
 							"pm.test(\"Status code is 201\", function () {",
 							"   pm.response.to.have.status(201);",
@@ -31,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"cedula\": 1023910123,\n    \"nombre\": \"Juan Torres\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas\",\n    \"promedio\": 3.8\n}",
+					"raw": "{\n    \"cedula\": 123348012,\n    \"nombre\": \"nombre\",\n    \"departamento\": \"Bogota\",\n    \"extension\": 12345,\n    \"esParEvaluador\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,24 +39,24 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/estudiante",
+					"raw": "{{base_url}}/profesor",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"estudiante"
+						"profesor"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Create Estudiante",
+					"name": "Create Profesor",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cedula\": 1023910123,\n    \"nombre\": \"Juan Torres\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas\",\n    \"promedio\": 3.8\n}",
+							"raw": "{\n    \"cedula\": 123348012,\n    \"nombre\": \"nombre\",\n    \"departamento\": \"Bogota\",\n    \"extension\": 12345,\n    \"esParEvaluador\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -64,12 +64,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/estudiante",
+							"raw": "{{base_url}}/profesor",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"estudiante"
+								"profesor"
 							]
 						}
 					},
@@ -81,7 +81,80 @@
 			]
 		},
 		{
-			"name": "Create estudiante with invalid promedio",
+			"name": "Create Evaluacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"evaluacion_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"calificacion\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/evaluacion",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"evaluacion"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Evaluacion",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"calificacion\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/evaluacion",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"evaluacion"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Create profesor with invalid extension",
 			"event": [
 				{
 					"listen": "test",
@@ -101,7 +174,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"cedula\": 1023910123,\n    \"nombre\": \"Juan Torres\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas\",\n    \"promedio\": 2.5\n}",
+					"raw": "{\n    \"cedula\": 123348012,\n    \"nombre\": \"nombre\",\n    \"departamento\": \"Bogota\",\n    \"extension\": 12345242,\n    \"esParEvaluador\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,24 +182,24 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/estudiante",
+					"raw": "{{base_url}}/profesor",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"estudiante"
+						"profesor"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Create estudiante with invalid promedio",
+					"name": "Create profesor with invalid extension",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"statusCode\": 400,\n    \"message\": \"El estudiante no tiene el promedio necesario\"\n}",
+							"raw": "{\n    \"statusCode\": 400,\n    \"message\": \"El profesor no cumple con los requisitos para ser creado\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,12 +207,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/estudiante",
+							"raw": "{{base_url}}/profesor",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"estudiante"
+								"profesor"
 							]
 						}
 					},
@@ -151,14 +224,14 @@
 			]
 		},
 		{
-			"name": "Create estudiante with invalid semestre",
+			"name": "Asignar evaluador",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"   pm.response.to.have.status(400);",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript",
@@ -167,36 +240,36 @@
 				}
 			],
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"cedula\": 1023910123,\n    \"nombre\": \"Juan Torres\",\n    \"semestre\": 2,\n    \"programa\": \"Ingenieria de Sistemas\",\n    \"promedio\": 3.7\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{base_url}}/estudiante",
+					"raw": "{{base_url}}/profesor/{{profesor_id}}/evaluacion/{{evaluacion_id}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"estudiante"
+						"profesor",
+						"{{profesor_id}}",
+						"evaluacion",
+						"{{evaluacion_id}}"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Create estudiante with invalid semestre",
+					"name": "Asignar evaluador",
 					"originalRequest": {
-						"method": "POST",
-						"header": [],
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"statusCode\": 400,\n    \"message\": \"El estudiante no tiene el semestre necesario\"\n}",
+							"raw": "{\n    \"message\": \"Evaluación asignada correctamente\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -204,12 +277,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/estudiante",
+							"raw": "{{base_url}}/profesor/{{profesor_id}}/evaluacion/{{evaluacion_id}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"estudiante"
+								"profesor",
+								"{{profesor_id}}",
+								"evaluacion",
+								"{{evaluacion_id}}"
 							]
 						}
 					},
@@ -219,38 +295,6 @@
 					"body": null
 				}
 			]
-		},
-		{
-			"name": "Delete Estudiante",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 204\", function () {",
-							"   pm.response.to.have.status(204);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/estudiante/{{estudiante_id}}",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"estudiante",
-						"{{estudiante_id}}"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }

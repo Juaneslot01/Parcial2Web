@@ -1,35 +1,35 @@
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { ProfesorService } from './profesor.service';
 import { ProfesorDto } from './profesor.dto';
 import { plainToInstance } from 'class-transformer';
 import { ProfesorEntity } from './profesor.entity';
-import { Long } from 'typeorm';
 import { BadRequestException } from '@nestjs/common';
+import { BusinessErrorsInterceptor } from 'src/shared/Interceptors/business-errors.interceptor';
 
 @Controller('profesor')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class ProfesorController {
   constructor(private readonly profesorService: ProfesorService) {}
 
   @Post()
   async create(@Body() profesorDto: ProfesorDto): Promise<ProfesorEntity> {
     const profesor = plainToInstance(ProfesorEntity, profesorDto);
-    return await this.create(profesor);
+    return await this.profesorService.create(profesor);
   }
 
-  @Put(':profesorId/asignar-evaluador')
+  @Put(':profesorId/evaluacion/:evaluacionId')
   async asignarEvaluador(
-    @Param('profesorId') profesorId: bigint,
-    @Body() profesorDTO: ProfesorDto,
-  ): Promise<ProfesorEntity> {
-    const profesor = await this.profesorService.findOne(profesorId);
-
-    if (!profesor) {
-      throw new BadRequestException('El profesor no existe');
-    }
+    @Param('profesorId') profesorId: string,
+    @Param('evaluacionId') evaluacionId: string,
+  ): Promise<{message: string}> {
     try {
-      return await this.asignarEvaluador(profesorId, profesorDTO);
-    } catch {
-      throw new BadRequestException('Error al asignar evaluador');
+      await this.profesorService.asignarEvaluador(BigInt(profesorId), BigInt(evaluacionId));
+      return { message: 'Evaluación asignada correctamente' };  
+    } catch (error) { 
+      if (error instanceof BadRequestException) {
+        return { message: error.message };
+      }
+      throw error;
     }
   }
 }

@@ -12,7 +12,6 @@ import { EstudianteDto } from './estudiante.dto';
 import { EstudianteEntity } from './estudiante.entity';
 import { plainToInstance } from 'class-transformer';
 import { EstudianteService } from './estudiante.service';
-import { Long } from 'typeorm';
 import { BusinessErrorsInterceptor } from '../shared/Interceptors/business-errors.interceptor';
 
 @Controller('estudiante')
