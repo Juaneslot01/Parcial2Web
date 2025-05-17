@@ -1,0 +1,441 @@
+{
+	"info": {
+		"_postman_id": "43281bc0-a721-479e-8761-90abdac89347",
+		"name": "Proyecto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32499104",
+		"_collection_link": "https://parcial-3144.postman.co/workspace/Parcial~8f208c44-4863-49ec-a7ba-dd9180487611/collection/32499104-43281bc0-a721-479e-8761-90abdac89347?action=share&source=collection_link&creator=32499104"
+	},
+	"item": [
+		{
+			"name": "Create proyecto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"proyecto_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"titulo titulo titulo\",\n    \"area\": \"area\",\n    \"presupuesto\": 12314,\n    \"notaFinal\": 5,\n    \"estado\": 1,\n    \"fechaInicio\": \"20 de agosto 2016\",\n    \"fechaFin\": \"20 de diciembre 2016\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/proyecto",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"proyecto"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create proyecto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"titulo titulo titulo\",\n    \"area\": \"area\",\n    \"presupuesto\": 12314,\n    \"notaFinal\": 5,\n    \"estado\": 1,\n    \"fechaInicio\": \"20 de agosto 2016\",\n    \"fechaFin\": \"20 de diciembre 2016\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/proyecto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"proyecto"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Create proyecto estado completo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"proyecto_id_2\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"titulo titulo titulo\",\n    \"area\": \"area\",\n    \"presupuesto\": 12314,\n    \"notaFinal\": 5,\n    \"estado\": 4,\n    \"fechaInicio\": \"20 de agosto 2016\",\n    \"fechaFin\": \"20 de diciembre 2016\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/proyecto",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"proyecto"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create proyecto estado completo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"titulo titulo titulo\",\n    \"area\": \"area\",\n    \"presupuesto\": 12314,\n    \"notaFinal\": 5,\n    \"estado\": 4,\n    \"fechaInicio\": \"20 de agosto 2016\",\n    \"fechaFin\": \"20 de diciembre 2016\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/proyecto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"proyecto"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Create proyecto with invalid presupuesto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"titulo titulo titulo\",\n    \"area\": \"area\",\n    \"presupuesto\": 0,\n    \"notaFinal\": 5,\n    \"estado\": 1,\n    \"fechaInicio\": \"20 de agosto 2016\",\n    \"fechaFin\": \"20 de diciembre 2016\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/proyecto",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"proyecto"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create proyecto with invalid presupuesto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"statusCode\": 400,\n    \"message\": \"El proyecto no cumple con el presupuesto requerido\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/proyecto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"proyecto"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Create proyecto with invalid titulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"titulo\",\n    \"area\": \"area\",\n    \"presupuesto\": 12341,\n    \"notaFinal\": 5,\n    \"estado\": 1,\n    \"fechaInicio\": \"20 de agosto 2016\",\n    \"fechaFin\": \"20 de diciembre 2016\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/proyecto",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"proyecto"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create proyecto with invalid titulo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"statusCode\": 400,\n    \"message\": \"El titulo del proyecto no cumple con el requisito\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/proyecto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"proyecto"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Avanzar proyecto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/proyecto/{{proyecto_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"proyecto",
+						"{{proyecto_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Avanzar proyecto",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"titulo\": \"titulo titulo titulo\",\n    \"area\": \"area\",\n    \"presupuesto\": 12314,\n    \"notaFinal\": 5,\n    \"estado\": 2,\n    \"fechaInicio\": \"20 de agosto 2016\",\n    \"fechaFin\": \"20 de diciembre 2016\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/proyecto/{{proyecto_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"proyecto",
+								"{{proyecto_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Avanzar proyecto with invalid estado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/proyecto/{{proyecto_id_2}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"proyecto",
+						"{{proyecto_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Avanzar proyecto with invalid estado",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"statusCode\": 412,\n    \"message\": \"El proyecto ya ha sido terminado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/proyecto/{{proyecto_id_2}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"proyecto",
+								"{{proyecto_id_2}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

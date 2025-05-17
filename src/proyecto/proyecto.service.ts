@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Long, Repository } from 'typeorm';
 import { ProyectoEntity } from './proyecto.entity';
 import { EstudianteEntity } from '../estudiante/estudiante.entity';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 
 @Injectable()
 export class ProyectoService {
@@ -17,12 +18,14 @@ export class ProyectoService {
     if (proyecto.presupuesto > 0 && proyecto.titulo.length > 15) {
       return await this.proyectoRepository.save(proyecto);
     } else if (proyecto.presupuesto <= 0) {
-      throw new BadRequestException(
+      throw new BusinessLogicException(
         'El proyecto no cumple con el presupuesto requerido',
+        BusinessError.BAD_REQUEST,
       );
     } else if (proyecto.titulo.length < 15) {
-      throw new BadRequestException(
+      throw new BusinessLogicException(
         'El titulo del proyecto no cumple con el requisito',
+        BusinessError.BAD_REQUEST,
       );
     } else {
       throw new BadRequestException('El proyecto no existe');
@@ -37,10 +40,11 @@ export class ProyectoService {
     if (proyecto.estado < 4) {
       proyecto.estado = proyecto.estado + 1;
       return await this.proyectoRepository.save(proyecto);
-    } else if (proyecto?.estado === 4) {
-      throw new BadRequestException('El proyecto ya ha sido terminado');
     } else {
-      throw new BadRequestException('El proyecto no existe');
+      throw new BusinessLogicException(
+        'El proyecto ya ha sido terminado',
+        BusinessError.PRECONDITION_FAILED
+      );
     }
   }
   //Cambie este metodo porque solo existe un estudiante segun el uml
@@ -50,7 +54,10 @@ export class ProyectoService {
       relations: ['proyectos'],
     });
     if (!estudiante) {
-      throw new BadRequestException('El proyecto no existe');
+      throw new BusinessLogicException(
+        'El proyecto no existe',
+        BusinessError.BAD_REQUEST,
+      );
     }
     return estudiante;
   }

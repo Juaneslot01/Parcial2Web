@@ -7,7 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProfesorEntity } from './profesor.entity';
 import { Long, Repository } from 'typeorm';
 import { EvaluacionEntity } from '../evaluacion/evaluacion.entity';
-import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 
 @Injectable()
 export class ProfesorService {
