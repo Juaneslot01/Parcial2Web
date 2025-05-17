@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EvaluacionEntity } from './evaluacion.entity';
 import { Repository } from 'typeorm';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 
 @Injectable()
 export class EvaluacionService {
@@ -14,8 +15,9 @@ export class EvaluacionService {
     if (evaluacion.calificacion <= 5 && evaluacion.calificacion > 0) {
       return await this.evaluacionRepository.save(evaluacion);
     } else {
-      throw new BadRequestException(
+      throw new BusinessLogicException(
         'La evaluación no cumple con los requisitos para ser creada',
+        BusinessError.BAD_REQUEST,
       );
     }
   }

@@ -162,6 +162,11 @@
 						"exec": [
 							"pm.test(\"Status code is 400\", function () {",
 							"   pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El proyecto no cumple con el presupuesto requerido\");",
 							"});"
 						],
 						"type": "text/javascript",
@@ -232,6 +237,11 @@
 						"exec": [
 							"pm.test(\"Status code is 400\", function () {",
 							"   pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El titulo del proyecto no cumple con el requisito\");",
 							"});"
 						],
 						"type": "text/javascript",
@@ -374,6 +384,11 @@
 						"exec": [
 							"pm.test(\"Status code is 412\", function () {",
 							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El proyecto ya ha sido terminado\");",
 							"});"
 						],
 						"type": "text/javascript",

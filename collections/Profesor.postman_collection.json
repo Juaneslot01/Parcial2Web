@@ -162,6 +162,11 @@
 						"exec": [
 							"pm.test(\"Status code is 400\", function () {",
 							"   pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El profesor no cumple con los requisitos para ser creado\");",
 							"});"
 						],
 						"type": "text/javascript",
